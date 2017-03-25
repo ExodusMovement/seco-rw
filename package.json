@@ -1,0 +1,41 @@
+{
+  "name": "seco-writer",
+  "version": "0.0.0",
+  "description": "",
+  "homepage": "https://github.com/ExodusMovement/seco-writer#readme",
+  "bugs": {
+    "url": "https://github.com/ExodusMovement/seco-writer/issues"
+  },
+  "license": "MIT",
+  "author": "Exodus Movement, Inc.",
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ExodusMovement/seco-writer.git"
+  },
+  "scripts": {
+    "build": "babel src --out-dir lib",
+    "test": "standard && tape **/*.test.js -r babel-register | tf-spec",
+    "posttest": "NODE_ENV=production npm run build"
+  },
+  "dependencies": {
+    "seco-file": "^1.0.1"
+  },
+  "devDependencies": {
+    "@tap-format/spec": "^0.2.0",
+    "babel-cli": "^6.24.0",
+    "babel-eslint": "^7.2.1",
+    "babel-plugin-syntax-flow": "^6.18.0",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "babel-plugin-typecheck": "^3.9.0",
+    "babel-preset-env": "^1.2.2",
+    "babel-register": "^6.24.0",
+    "standard": "^9.0.2",
+    "tape": "^4.6.3",
+    "tempfile": "^1.1.1"
+  },
+  "standard": {
+    "ignore": "lib/",
+    "parser": "babel-eslint"
+  }
+}
