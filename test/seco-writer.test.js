@@ -54,3 +54,32 @@ test('writeFile 2x', async (t) => {
 
   t.end()
 })
+
+test('destroy()', async (t) => {
+  t.plan(3)
+
+  const testFile: string = tempfile('.seco')
+  const writer = new Writer(testFile, Buffer.from('opensesame'), { appName: 'Exodus', appVersion: '1.0.0' })
+
+  await writer.write(Buffer.from('Hello, lets meet at 10 PM to plan our secret mission!'))
+
+  t.doesNotThrow(() => writer.destroy())
+
+  await writer.read().catch(e => t.assert(e, 'read() errors when called after destroy()'))
+
+  await writer.write(Buffer.from('Hello World!'))
+    .catch(e => t.assert(e, 'write() errors when called after destroy()'))
+
+  t.end()
+})
+
+test("destroy() doesn't error when class is unused", async (t) => {
+  t.plan(1)
+
+  const testFile: string = tempfile('.seco')
+  const writer = new Writer(testFile, 'opensesame', { appName: 'Exodus', appVersion: '1.0.0' })
+
+  t.doesNotThrow(() => writer.destroy())
+
+  t.end()
+})
