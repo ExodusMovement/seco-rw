@@ -1,13 +1,13 @@
-# seco-writer
+# seco-rw
 
 A handy class for reading/writing [secure containers](https://github.com/ExodusMovement/secure-container). Caches the file's `blobKey` & `metadata` to avoid expensive scrypt operations.
 
 ## Usage
 
 ```js
-import Writer from 'seco-writer'
+import secoRW from 'seco-rw'
 
-const somefile = new Writer('somefile.seco', 'opensesame', {
+const somefile = new secoRW('somefile.seco', 'opensesame', {
   appName: 'Exodus',
   appVersion: '1.0.0'
 })
@@ -17,7 +17,7 @@ await somefile.read().toString('utf8')
 // -> Hello World!
 ```
 
-### `new Writer(file, passphrase, header)`
+### `new secoRW(file, passphrase, header)`
 
 - `file` (String) Path to the secure-container
 - `passphrase` (String | Buffer) Passphrase for the secure-container
