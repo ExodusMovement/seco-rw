@@ -35,6 +35,12 @@ Returns a Promise that resolves when the file has been written.
 
 Returns a Promise, resolving to a Buffer of the file data.
 
+### `destroy()`
+
+Destroys the instance and zero-fills the internal cache buffer. Future calls to `read()` or `write()` will error out.
+
+If you are using a `Buffer` passphrase, you may also want to call `.fill(0)` to zero-fill that too.
+
 ## License
 
 MIT
