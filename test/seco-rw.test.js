@@ -56,10 +56,11 @@ test('writeFile 2x', async (t) => {
 })
 
 test('destroy()', async (t) => {
-  t.plan(3)
+  t.plan(4)
 
   const testFile: string = tempfile('.seco')
-  const file = createSecoRW(testFile, Buffer.from('opensesame'), { appName: 'Exodus', appVersion: '1.0.0' })
+  const passphrase = Buffer.from('opensesame')
+  const file = createSecoRW(testFile, passphrase, { appName: 'Exodus', appVersion: '1.0.0' })
 
   await file.write(Buffer.from('Hello, lets meet at 10 PM to plan our secret mission!'))
 
@@ -69,6 +70,8 @@ test('destroy()', async (t) => {
 
   await file.write(Buffer.from('Hello World!'))
     .catch(e => t.assert(e, 'write() errors when called after destroy()'))
+
+  t.equal(passphrase.toString(), 'opensesame', "doesn't overwrite passphrase")
 
   t.end()
 })

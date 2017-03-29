@@ -27,7 +27,6 @@ export default function (file: string, passphrase: string | Buffer, header: Obje
     destroy () {
       destroyed = true
       if (blobKey) blobKey.fill(0)
-      if (Buffer.isBuffer(passphrase)) passphrase.fill(0)
     }
   }
 }
