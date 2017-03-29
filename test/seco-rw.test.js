@@ -1,12 +1,12 @@
 import test from 'tape'
 import tempfile from 'tempfile'
-import secoRW from '../src'
+import createSecoRW from '../src'
 
 test('readFile / writeFile', async (t) => {
   t.plan(1)
 
   const testFile: string = tempfile('.seco')
-  const file = new secoRW(testFile, Buffer.from('opensesame'), { appName: 'Exodus', appVersion: '1.0.0' })
+  const file = createSecoRW(testFile, Buffer.from('opensesame'), { appName: 'Exodus', appVersion: '1.0.0' })
 
   const secretMessage = new Buffer('Hello, lets meet at 10 PM to plan our secret mission!')
 
@@ -23,7 +23,7 @@ test('readFile / writeFile w/ string passphrase', async (t) => {
   t.plan(1)
 
   const testFile: string = tempfile('.seco')
-  const file = new secoRW(testFile, 'opensesame', { appName: 'Exodus', appVersion: '1.0.0' })
+  const file = createSecoRW(testFile, 'opensesame', { appName: 'Exodus', appVersion: '1.0.0' })
 
   const secretMessage = new Buffer('Hello, lets meet at 10 PM to plan our secret mission!')
 
@@ -40,7 +40,7 @@ test('writeFile 2x', async (t) => {
   t.plan(1)
 
   const testFile: string = tempfile('.seco')
-  const file = new secoRW(testFile, Buffer.from('opensesame'), { appName: 'Exodus', appVersion: '1.0.0' })
+  const file = createSecoRW(testFile, Buffer.from('opensesame'), { appName: 'Exodus', appVersion: '1.0.0' })
 
   const secretMessage = new Buffer('Hello, lets meet at 11 PM to plan our secret mission!')
   const secretMessage2 = new Buffer('Hello, lets meet at 12 AM to plan our secret mission!')
@@ -59,7 +59,7 @@ test('destroy()', async (t) => {
   t.plan(3)
 
   const testFile: string = tempfile('.seco')
-  const file = new secoRW(testFile, Buffer.from('opensesame'), { appName: 'Exodus', appVersion: '1.0.0' })
+  const file = createSecoRW(testFile, Buffer.from('opensesame'), { appName: 'Exodus', appVersion: '1.0.0' })
 
   await file.write(Buffer.from('Hello, lets meet at 10 PM to plan our secret mission!'))
 
@@ -73,11 +73,11 @@ test('destroy()', async (t) => {
   t.end()
 })
 
-test("destroy() doesn't error when class is unused", async (t) => {
+test("destroy() doesn't error when instance was not used", async (t) => {
   t.plan(1)
 
   const testFile: string = tempfile('.seco')
-  const file = new secoRW(testFile, 'opensesame', { appName: 'Exodus', appVersion: '1.0.0' })
+  const file = createSecoRW(testFile, 'opensesame', { appName: 'Exodus', appVersion: '1.0.0' })
 
   t.doesNotThrow(() => file.destroy())
 

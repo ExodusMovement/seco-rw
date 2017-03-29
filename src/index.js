@@ -1,7 +1,6 @@
 // @flow
 import * as secoFile from 'seco-file'
 
-// Not using ES6 class here to keep the passphrase private
 export default function (file: string, passphrase: string | Buffer, header: Object) {
   let blobKey
   let metadata
